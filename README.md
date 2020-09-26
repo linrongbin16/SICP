@@ -1,1 +1,3 @@
 # SICP
+
+use chicken scheme

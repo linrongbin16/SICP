@@ -1,8 +1,5 @@
-#!/usr/local/bin/guile -s
-!#
-
 (define (sicp)
-  (format #t "~%sicp:~%"))
+  (print "sicp:"))
 
 (define size 2)
 (define pi 3.14159)
@@ -296,10 +293,10 @@
                1.0))
 
 (sicp)
-(format #t "fixed-point cos 1.0 = ~a~%" (fixed-point cos 1.0))
-(format #t "fixed-point y=sin(y)+cos(y) 1.0 = ~a~%" (fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0))
-(format #t "fixed-point based sqrt 4.0 = ~a~%" (sqrt 4.0))
-(format #t "fixed-point based sqrt 11.0 = ~a~%" (sqrt 11.0))
+; (format #t "fixed-point cos 1.0 = ~a~%" (fixed-point cos 1.0))
+; (format #t "fixed-point y=sin(y)+cos(y) 1.0 = ~a~%" (fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0))
+; (format #t "fixed-point based sqrt 4.0 = ~a~%" (sqrt 4.0))
+; (format #t "fixed-point based sqrt 11.0 = ~a~%" (sqrt 11.0))
 
 (define (average-damp f)
   (lambda (x) (average x (f x))))
