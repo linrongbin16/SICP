@@ -388,9 +388,82 @@
   (display (denom x)))
 
 (define one-half (make-rat 1 2))
-(print-rat one-half)
 (define one-third (make-rat 1 3))
-(print-rat one-third)
-(print-rat (add-rat one-half one-third))
-(print-rat (mul-rat one-half one-third))
-(print-rat (mul-rat one-third one-third))
+; (print-rat one-half)
+; (print-rat one-third)
+; (print-rat (add-rat one-half one-third))
+; (print-rat (mul-rat one-half one-third))
+; (print-rat (mul-rat one-third one-third))
+
+(define (make-rat n d)
+  (cons n d))
+
+(define (numer x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (car x) g)))
+
+(define (denom x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (cdr x) g)))
+
+; (print-rat one-half)
+; (print-rat one-third)
+; (print-rat (add-rat one-half one-third))
+; (print-rat (mul-rat one-half one-third))
+; (print-rat (mul-rat one-third one-third))
+
+(define (add-interval x y)
+  (make-interval (+ (lower-bound x) (lower-bound y))
+                 (+ (upper-bound x) (upper-bound y))))
+
+(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) (lower-bound y)))
+        (p2 (* (lower-bound x) (upper-bound y)))
+        (p3 (* (upper-bound x) (lower-bound y)))
+        (p4 (* (upper-bound x) (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+                   (max p1 p2 p3 p4))))
+
+(define (div-interval x y)
+  (mul-interval x
+                (make-interval (/ 1.0 (upper-bound y))
+                               (/ 1.0 (lower-bound y)))))
+
+(define (make-interval a b)
+  (cons a b))
+
+; (print "cons 1,2,3,4 = " (cons 1
+;              (cons 2
+;                    (cons 3 4))))
+; (print "list 1,2,3,4 = " (list 1 2 3 4))
+
+(define one-through-four (list 1 2 3 4))
+; (print "one-through-four = " one-through-four ", car one-through-four = " (car one-through-four) ", cdr one-through-four = " (cdr one-through-four))
+; (print "cons 10 one-through-four = " (cons 10 one-through-four) ", cons 5 one-through-four = " (cons 5 one-through-four))
+
+(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
+
+(define squares (list 1 4 9 16 25))
+
+; (print "squares at 3 = " (list-ref squares 3))
+
+(define (length items)
+  (if (null? items)
+      0
+      (+ 1 (length (cdr items)))))
+
+(define odds (list 1 3 5 7))
+
+; (print "length odds = " (length odds))
+
+(define (length items)
+  (define (length-iter a count)
+    (if (null? a)
+        count
+        (length-iter (cdr a) (+ 1 count))))
+  (length-iter items 0))
+
+(print "length odds = " (length odds))
