@@ -1,6 +1,7 @@
 (define (sicp)
   (print "sicp:"))
 
+(define nil '())
 (define size 2)
 (define pi 3.14159)
 (define radius 10)
@@ -467,3 +468,33 @@
   (length-iter items 0))
 
 ; (print "length odds = " (length odds))
+
+(define (scale-list items factor)
+  (if (null? items)
+      nil
+      (cons (* (car items) factor)
+            (scale-list (cdr items) factor))))
+
+(define (map proc items)
+  (if (null? items)
+      nil
+      (cons (proc (car items))
+            (map proc (cdr items)))))
+
+; (print "scale-list 10 = "(scale-list (list 1 2 3 4 5) 10))
+; (print "map abs list = " (map abs (list -10 2.5 -11.6 17)))
+; (print "map abs list = " (map abs (list -10 2.5 -11.6 17)))
+
+(define (scale-list items factor)
+  (map (lambda (x) (* x factor))
+       items))
+
+(define x (cons (list 1 2) (list 3 4)))
+(define (count-leaves x)
+  (cond ((null? x) 0)
+        ((not (pair? x)) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x))))))
+
+(print "length x = " (length x))
+(print "count-leaves x = " (count-leaves x))
